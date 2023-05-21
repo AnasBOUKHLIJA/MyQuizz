@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Accueil</title>
+    <f:metadata>
+        <f:event type="preRenderView" listener="#{loginBean.checkLogin}" />
+    </f:metadata>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <link rel="stylesheet" href="styles/style.css" />
+    <link rel="icon" href="assets/logo-icon.png" />
+    <script src="https://cdn.tailwindcss.com" type=""></script>
+    <script type="">
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#A6D72E',
+                        'secondary': '#52C7DB',
+                        'third': '#FFC233',
+                        'primary-bg': '#84B226',
+                        'sub-primary-bg': '#84B226',
+                    },
+                    container: {
+                        center: true,
+                    },
+                    boxShadow: {
+                        '3xl': 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px',
+                        'card': 'rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px',
+                    }
+                }
+            }
+        }
+    </script>
+</h:head>
+<f:view>
+    <div class="flex">
+        <div id="sidebar" class="w-full bg-white min-h-screen overflow-hidden fixed lg:relative">
+            <ul class="list-none w-full p-5">
+                <li class="transition ease-in-out cursor-pointer mb-2 rounded-md text-black bg-primary text-white">
+                    <div class="flex items-center w-full h-full p-5 rounded-mdl gap-2">
+                        <div class="flex items-center justify-center p-2 bg-primary text-white w-[50px] h-[50px] text-[30px] rounded-full">
+                            <i class="fa-regular fa-user"></i>
+                        </div>#{loginBean.utilisateur.prenom} #{loginBean.utilisateur.nom}
+                    </div>
+                </li>
+                <ui:fragment rendered="#{loginBean.isPoseur()}">
+                    <li class="transition ease-in-out cursor-pointer mb-2 rounded-md text-black hover:bg-primary hover:text-white">
+                        <h:link styleClass="block w-full h-full p-5 rounded-mdl" outcome="index" value="Home"/>
+                    </li>
+                    <li class="transition ease-in-out cursor-pointer mb-2 rounded-md text-black hover:bg-primary hover:text-white">
+                        <h:link styleClass="block w-full h-full p-5 rounded-md" outcome="quizzes" value="Mes quiz"/>
+                    </li>
+                    <li class="transition ease-in-out cursor-pointer mb-2 rounded-md text-black hover:bg-primary hover:text-white">
+                        <h:link styleClass="block w-full h-full p-5 rounded-md" outcome="questions" value="Mes questions"/>
+                    </li>
+                </ui:fragment>
+                <ui:fragment rendered="#{loginBean.isApparenant()}">
+                    <li class="transition ease-in-out cursor-pointer mb-2 rounded-md text-black hover:bg-primary hover:text-white">
+                        <h:link styleClass="block w-full h-full p-5 rounded-md" outcome="workspace" value="Mon espace de travail"/>
+                    </li>
+                </ui:fragment>
+                <li class="transition ease-in-out cursor-pointer mb-2 rounded-md text-black hover:bg-primary hover:text-white mt-10 relative">
+                    <div class="flex items-center w-full h-full p-2 rounded-mdl gap-2">
+                        <h:form styleClass="flex items-center">
+                            <h:commandButton styleClass="w-full h-full absolute left-0 top-0" action="#{loginBean.deconnexion()}">
+                                <div class="flex items-center justify-center p-2 w-[40px] h-[40px] text-[20px] rounded-full">
+                                    <i class="fa-solid fa-right-from-bracket"></i>
+                                </div> Deconnexion
+                            </h:commandButton>
+                        </h:form>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="relative w-full">
+            <div class="header flex justify-between items-center px-6 py-3 bg-white text-white">
+                <img class="h-14" src="assets/logo.svg" alt="User avatar" />
+                <button id="menuToggle" class="menuToggle cursor-pointer">
+                    <div id="menuIcon" >
+                        <div class="bar1"></div>
+                        <div class="bar2"></div>
+                        <div class="bar3"></div>
+                    </div>
+                </button>
+            </div>
+            <div class="main-content">
+
+            </div>
+        </div>
+    </div>
+</f:view>
+<h:outputScript>
+    const sidebar = document.querySelector('#sidebar');
+    sidebar.classList.add('w-0');
+    document.querySelector('#menuToggle').addEventListener('click', () => {
+        const menu = document.querySelector('#menuIcon');
+        if(menu.classList.contains('menuOpen')){
+            menu.classList.remove('menuOpen');
+            sidebar.classList.remove('w-2/4');
+            sidebar.classList.remove('lg:w-2/5');
+            sidebar.classList.add('w-0');
+        }else{
+            menu.classList.add('menuOpen');
+            sidebar.classList.remove('w-0');
+            sidebar.classList.add('w-2/4');
+            sidebar.classList.add('lg:w-2/5');
+        }
+    })
+</h:outputScript>
+</html>

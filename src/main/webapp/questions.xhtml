@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Questions</title>
+    <f:metadata>
+        <f:event type="preRenderView" listener="#{loginBean.checkLogin}" />
+    </f:metadata>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <link rel="stylesheet" href="styles/style.css" />
+    <link rel="icon" href="assets/logo-icon.png" />
+    <script src="https://cdn.tailwindcss.com" type=""></script>
+    <script type="">
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#A6D72E',
+                        'secondary': '#52C7DB',
+                        'third': '#FFC233',
+                        'primary-bg': '#84B226',
+                        'sub-primary-bg': '#84B226',
+                    },
+                    container: {
+                        center: true,
+                    },
+                    boxShadow: {
+                        '3xl': 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px',
+                        'card': 'rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px',
+                    }
+                }
+            }
+        }
+    </script>
+</h:head>
+<f:view>
+    <div class="flex">
+        <div id="sidebar" class="w-full bg-white min-h-screen overflow-hidden fixed lg:relative">
+            <ul class="list-none w-full p-5">
+                <li class="transition ease-in-out cursor-pointer mb-2 rounded-md text-black bg-primary text-white">
+                    <div class="flex items-center w-full h-full p-5 rounded-mdl gap-2">
+                        <div class="flex items-center justify-center p-2 bg-primary text-white w-[50px] h-[50px] text-[30px] rounded-full">
+                            <i class="fa-regular fa-user"></i>
+                        </div>#{loginBean.utilisateur.prenom} #{loginBean.utilisateur.nom}
+                    </div>
+                </li>
+                <ui:fragment rendered="#{loginBean.isPoseur()}">
+                    <li class="transition ease-in-out cursor-pointer mb-2 rounded-md text-black hover:bg-primary hover:text-white">
+                        <h:link styleClass="block w-full h-full p-5 rounded-mdl" outcome="index" value="Home"/>
+                    </li>
+                    <li class="transition ease-in-out cursor-pointer mb-2 rounded-md text-black hover:bg-primary hover:text-white">
+                        <h:link styleClass="block w-full h-full p-5 rounded-md" outcome="quizzes" value="Mes quiz"/>
+                    </li>
+                    <li class="transition ease-in-out cursor-pointer mb-2 rounded-md text-black hover:bg-primary hover:text-white">
+                        <h:link styleClass="block w-full h-full p-5 rounded-md" outcome="questions" value="Mes questions"/>
+                    </li>
+                </ui:fragment>
+                <ui:fragment rendered="#{loginBean.isApparenant()}">
+                    <li class="transition ease-in-out cursor-pointer mb-2 rounded-md text-black hover:bg-primary hover:text-white">
+                        <h:link styleClass="block w-full h-full p-5 rounded-md" outcome="workspace" value="Mon espace de travail"/>
+                    </li>
+                </ui:fragment>
+                <li class="transition ease-in-out cursor-pointer mb-2 rounded-md text-black hover:bg-primary hover:text-white mt-10 relative">
+                    <div class="flex items-center w-full h-full p-2 rounded-mdl gap-2">
+                        <h:form styleClass="flex items-center">
+                            <h:commandButton styleClass="w-full h-full absolute left-0 top-0" action="#{loginBean.deconnexion()}">
+                                <div class="flex items-center justify-center p-2 w-[40px] h-[40px] text-[20px] rounded-full">
+                                    <i class="fa-solid fa-right-from-bracket"></i>
+                                </div> Deconnexion
+                            </h:commandButton>
+                        </h:form>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    <div class="relative w-full">
+        <div class="header flex justify-between items-center px-6 py-3 bg-white text-white">
+            <img class="h-14" src="assets/logo.svg" alt="User avatar" />
+            <button id="menuToggle" class="menuToggle cursor-pointer">
+                <div id="menuIcon" >
+                    <div class="bar1"></div>
+                    <div class="bar2"></div>
+                    <div class="bar3"></div>
+                </div>
+            </button>
+        </div>
+        <div class="main-content">
+            <div class="shadow-3xl p-8 m-5 rounded-lg">
+                <h1 class="text-2xl font-semibold mb-4">Créez une question pour aider les apprenants</h1>
+                <p class="mb-4">
+                    Partagez vos connaissances et aidez les autres à apprendre en ajoutant des questions pertinentes et intéressantes.
+                    Votre contribution est précieuse pour construire une communauté d'apprentissage solide et engagée.
+                </p>
+                <h:form>
+                    <div class="w-full">
+                        <label for="lenonce" class="block uppercase tracking-wide text-our-black text-xs font-bold mb-2">Question :</label>
+                        <h:inputText id="lenonce" value="#{questionManagedBean.question.lenonce}" styleClass="appearance-none block w-full bg-gray-50 text-our-black border border-primary rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" required="true" />
+                    </div>
+                    <div class="w-full mt-3">
+                        <label for="justification" class="block uppercase tracking-wide text-our-black text-xs font-bold mb-2">Justification :</label>
+                        <h:inputText id="justification" value="#{questionManagedBean.question.justification}" styleClass="appearance-none block w-full bg-gray-50 text-our-black border border-primary rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" required="true" />
+                    </div>
+                    <div class="w-full mt-3">
+                        <label for="note_question" class="block uppercase tracking-wide text-our-black text-xs font-bold mb-2">Note de question :</label>
+                        <h:inputText id="note_question" value="#{questionManagedBean.question.note_question}" styleClass="appearance-none block w-full bg-gray-50 text-our-black border border-primary rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" required="true" />
+                    </div>
+                    <div class="w-full mt-4">
+                        <h:commandButton styleClass="cursor-pointer bg-primary-bg inline-block w-full p-2 rounded" value="Ajouter" action="#{questionManagedBean.createQuestion}" rendered="#{questionManagedBean.question.id &lt;= 0}" />
+                        <h:commandButton styleClass="cursor-pointer bg-primary-bg inline-block w-full p-2 mt-3 rounded" value="Enregistrer" action="#{questionManagedBean.updateQuestion}" rendered="#{questionManagedBean.question.id > 0}" />
+                        <h:commandButton styleClass="cursor-pointer inline-block w-full p-2 mt-3 text-left text-primary" value="Ajouter une autre question" action="#{questionManagedBean.resetQuestion}" rendered="#{questionManagedBean.question.id > 0}" />
+                    </div>
+                </h:form>
+                <h:dataTable id="reponsesList" styleClass="question-reponses mt-10 w-full relative" value="#{questionManagedBean.question.reponses}" var="reponse" rendered="#{not empty questionManagedBean.question.reponses}">
+                    <h:column>
+                        <f:facet name="header">Enonce</f:facet>
+                        #{reponse.enonce}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Etat</f:facet>
+                        #{reponse.etat}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Action</f:facet>
+                        <div class="bg-red-500 h-[30px] w-[30px] rounded-full flex justify-center items-center cursor-pointer relative text-white">
+                            <h:form styleClass="flex justify-center items-center">
+                                <h:commandButton styleClass="w-full h-full absolute left-0 top-0 z-10 rounded-full cursor-pointer" action="#{questionManagedBean.deleteReponse(reponse)}">
+                                    <i class="fa-solid fa-trash"></i>
+                                </h:commandButton>
+                            </h:form>
+                        </div>
+                    </h:column>
+                </h:dataTable>
+                <h:form styleClass="block lg:flex relative mt-10">
+                    <div class="w-full lg:w-11/12 relative bg-gray-300 p-5 rounded-l-xl rounded-r-xl lg:rounded-r-[0px]">
+                        <div class="w-full mt-3">
+                            <h:inputText id="reponse" value="#{questionManagedBean.reponse.enonce}"  styleClass="appearance-none block w-full bg-gray-50 text-our-black border border-primary rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" required="true" >
+                                <f:passThroughAttribute  name="placeholder" value="Ajouter des reponses" />
+                            </h:inputText>
+                        </div>
+                        <div class="w-full mt-3">
+                            <h:selectOneMenu id="etat" value="#{questionManagedBean.reponse.etat}" styleClass="appearance-none block w-full bg-gray-50 text-our-black border border-primary rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" required="true">
+                                <f:selectItem itemValue="false" itemLabel="False" />
+                                <f:selectItem itemValue="true" itemLabel="True" />
+                            </h:selectOneMenu>
+                        </div>
+                    </div>
+                    <div class="bg-primary-bg w-full lg:w-1/12 text-white p-2 lg:p-0 text-3xl lg:text-5xl flex justify-center items-center rounded-r-xl rounded-l-xl lg:rounded-l-[0px] lg:rounded-l-[0px] relative">
+                        <h:form styleClass="flex justify-center items-center">
+                            <h:commandButton styleClass="w-full h-full absolute left-0 top-0 rounded-tr-lg rounded-bl-xl cursor-pointer" action="#{questionManagedBean.addReponseToQuestion}" update="@form">
+                                <i class="fa-solid fa-plus"></i>
+                            </h:commandButton>
+                        </h:form>
+                    </div>
+                </h:form>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 my-5 mt-10 p-5">
+                <ui:repeat value="#{questionManagedBean.questions}" var="question">
+                    <div class="card h-auto lg:h-[330px] pt-[30px] bg-white shadow-card cursor-pointer rounded-lg relative">
+                        <div class="absolute top-0 left-0 h-[40px] w-[40px] text-white flex justify-center items-center rounded-tl-lg rounded-br-xl bg-orange-500">
+                            <h:form styleClass="flex justify-center items-center">
+                                <h:commandButton styleClass="w-full h-full absolute left-0 top-0 rounded-tr-lg rounded-bl-xl cursor-pointer" action="#{questionManagedBean.fillQuestion(question)}" update="@form">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </h:commandButton>
+                            </h:form>
+                        </div>
+                        <div class="absolute top-0 right-0 h-[40px] w-[40px] text-white flex justify-center items-center rounded-tr-lg rounded-bl-xl bg-red-500">
+                            <h:form styleClass="flex justify-center items-center">
+                                <h:commandButton styleClass="w-full h-full absolute left-0 top-0 rounded-tr-lg rounded-bl-xl cursor-pointer" action="#{questionManagedBean.deleteQuestion(question)}" update="@form">
+                                    <i class="fa-solid fa-trash fa-lg"></i>
+                                </h:commandButton>
+                            </h:form>
+                        </div>
+                        <h4 class="p-4 h-auto lg:h-[125px]">#{question.lenonce}</h4>
+                        <h6 class="p-4 h-auto lg:h-[50px] text-gray-500">#{question.note_question} points</h6>
+                        <div class="justification h-auto lg:h-[125px] transition easy justify-center items-center bg-primary text-white overflow-hidden rounded-b-lg p-4">
+                            #{question.justification}
+                        </div>
+                    </div>
+                </ui:repeat>
+            </div>
+        </div>
+    </div>
+    </div>
+</f:view>
+<h:outputScript>
+    const sidebar = document.querySelector('#sidebar');
+    sidebar.classList.add('w-0');
+    document.querySelector('#menuToggle').addEventListener('click', () => {
+        const menu = document.querySelector('#menuIcon');
+        if(menu.classList.contains('menuOpen')){
+            menu.classList.remove('menuOpen');
+            sidebar.classList.remove('w-2/4');
+            sidebar.classList.remove('lg:w-2/5');
+            sidebar.classList.add('w-0');
+        }else{
+            menu.classList.add('menuOpen');
+            sidebar.classList.remove('w-0');
+            sidebar.classList.add('w-2/4');
+            sidebar.classList.add('lg:w-2/5');
+        }
+    })
+</h:outputScript>
+</html>

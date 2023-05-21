@@ -1,0 +1,301 @@
+/* Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+    box-sizing: border-box !important;
+    scroll-behavior: smooth;
+    scroll-padding-top: 2rem;
+    list-style: none;
+    text-decoration: none;
+    outline: none;
+}
+:root {
+    --primary-color: #A6D72E; /* used for primary elements */
+    --secondary-color: #52C7DB; /* used for secondary elements */
+    --third-color: #FFC233; /* used for secondary elements */
+    --background-1-color: #F7DC6F; /* used for background */
+    --background-2-color: #F2F2F2; /* used for background */
+    --background-primary-color: #84B226; /* used for background */
+    --text-color: #000; /* used for background */
+}
+
+.ml-1-6 {
+    margin-left: 16.666667%; /* 1/6 (16.67%) */
+}
+
+.connexion_container{
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--background-primary-color);
+}
+
+.connexion_container form{
+    width: 45%;
+    min-height: 340px;
+    background-color: rgba(183, 183, 183, 0.2);
+    padding: 100px 40px 40px 40px;
+    border-radius: 15px;
+    position: relative;
+    box-shadow: 0 0.5rem 10rem rgba(0, 0, 0, 0.1);
+    margin-top: 60px;
+}
+.logo-circle{
+    width: 160px;
+    height: 160px;
+    background-color: var(--background-primary-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 50%;
+    top: -80px;
+    transform: translateX(-50%);
+    box-shadow: rgba(255, 255, 255, 0.05) 0px 0px 0px 5px;
+}
+.logo-circle img{
+    width: 100%;
+    height: 100%;
+
+}
+.connexion_container label{
+    font-size: 16px;
+    font-weight: bolder;
+    margin: 10px 0;
+    color: var(--text-color);
+}
+.connexion_container input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 5px;
+    margin: 5px 0;
+    border: none;
+    outline: none;
+    border-radius: 3px;
+    box-sizing: border-box;
+    font-size: 15px;
+}
+
+.connexion_container input[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 5px;
+    border: none;
+    outline: none;
+    border-radius: 3px;
+    background-color: var(--background-primary-color);
+    color: var(--text-color);
+    cursor: pointer;
+    margin: 10px 0;
+    font-size: 15px;
+}
+
+.connexion_container input[type="submit"]:hover {
+
+}
+
+.connexion_container .btn-link{
+    background-color: transparent !important;
+}
+
+/* Header */
+.header{
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+#sidebar{
+    top: 0;
+    left: 0;
+    z-index: 10;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+    transition: ease-in-out .5s;
+}
+.justification{
+    transition: ease-in-out 5s;
+}
+.menuIcon {
+    width: 25px;
+    height: 14px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.bar1,
+.bar2,
+.bar3 {
+    width: 30px;
+    height: 4px;
+    background-color: #232323;
+    margin: 5px 0;
+    transition: 0.3s;
+    border-radius: 5px;
+}
+
+.bar2 {
+    width: 25px;
+    margin-left: 5px;
+}
+
+.menuOpen .bar1 {
+    transform: rotate(-45deg) translate(-5px, 7.5px);
+}
+
+.menuOpen .bar2 {
+    opacity: 0;
+}
+
+.menuOpen .bar3 {
+    transform: rotate(45deg) translate(-5px, -7.5px);
+}
+
+.main-content{
+    padding: 20px 15px;
+}
+
+.questions tbody tr td{
+    display: block !important;
+    margin: 10px;
+}
+
+
+.question-reponses{
+    width: 100%;
+    display: block;
+    position: relative;
+    margin-top: 30px;
+}
+.question-reponses thead,
+.question-reponses thead tr,
+.question-reponses tbody,
+.question-reponses tbody tr{
+    width: 100% !important;
+    display: block;
+    position: relative;
+}
+
+.question-reponses thead tr,
+.question-reponses tbody tr{
+    display: flex;
+}
+.question-reponses tbody tr td,
+.question-reponses thead tr th{
+    display: flex;
+    justify-content: center;
+    width: 20%;
+    padding: 5px;
+}
+.question-reponses tbody tr{
+    padding: 5px;
+    border-radius: 5px;
+    margin: 2px 0;
+}
+
+.question-reponses tbody tr td:first-child,
+.question-reponses thead tr th:first-child{
+    width: 60% !important;
+    justify-content: left;
+
+}
+
+
+
+
+
+.quiz-questions-selected,
+.quiz-questions-selected tbody{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 8px;
+}
+
+.quiz-questions-selected tbody tr{
+    background-color: var(--primary-color);
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.quiz-questions{
+    width: 100%;
+    display: block;
+    position: relative;
+    margin-top: 30px;
+}
+.quiz-questions thead,
+.quiz-questions thead tr,
+.quiz-questions tbody,
+.quiz-questions tbody tr{
+    width: 100% !important;
+    display: block;
+    position: relative;
+}
+
+.quiz-questions thead tr,
+.quiz-questions tbody tr{
+    display: flex;
+}
+.quiz-questions tbody tr td,
+.quiz-questions thead tr th{
+    display: flex;
+    justify-content: left;
+    width: 70%;
+    padding: 5px;
+}
+
+.quiz-questions tbody tr td:first-child,
+.quiz-questions thead tr th:first-child{
+    width: 10% !important;
+    justify-content: center;
+}
+
+.quiz-questions tbody tr td:last-child,
+.quiz-questions thead tr th:last-child{
+    width: 20% !important;
+    justify-content: center;
+}
+
+.page-quiz tbody,
+.page-quiz tbody tr,
+.page-quiz tbody tr td{
+    display: block;
+    width: 100%;
+    padding: 3px;
+}
+/* End of header */
+@media (min-width: 640px) {
+    .ml-1-6 {
+        margin-left: 0; /* 1/6 (16.67%) */
+    }
+}
+@media (min-width: 768px) {
+    .ml-1-6 {
+        margin-left: 0; /* 1/6 (16.67%) */
+    }
+}
+@media (min-width: 1024px) {
+    .ml-1-6 {
+        margin-left: 16.666667%; /* 1/6 (16.67%) */
+    }
+}
+@media (min-width: 1280px) {
+    .ml-1-6 {
+        margin-left: 16.666667%; /* 1/6 (16.67%) */
+    }
+}
+@media (max-width: 1000px) {
+    form {
+        width: 90% !important;
+    }
+}

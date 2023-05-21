@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Login Page</title>
+    <link rel="stylesheet" href="styles/style.css" />
+    <link rel="icon" href="assets/logo-icon.png" />
+    <script src="https://cdn.tailwindcss.com" type=""></script>
+    <script type="">
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#A6D72E',
+                        'secondary': '#52C7DB',
+                        'third': '#FFC233',
+                        'primary-bg': '#84B226'
+                    }
+                }
+            }
+        }
+    </script>
+</h:head>
+<f:view>
+    <h:body>
+        <div class="connexion_container">
+            <h:form>
+                <div class="logo-circle">
+                    <img src="assets/logo-icon.png" alt=""/>
+                </div>
+                <div>
+                    <h:outputLabel for="username">Nom d'utilisateur :</h:outputLabel>
+                    <h:inputText id="username" value="#{loginBean.utilisateur.login}" required="true"/>
+                </div>
+                <div>
+                    <h:outputLabel for="password">Mot de passe :</h:outputLabel>
+                    <h:inputSecret id="password" value="#{loginBean.utilisateur.password}" required="true"/>
+                </div>
+                <div>
+                    <h:commandButton  styleClass="cursor-pointer bg-primary-bg inline-block w-full p-2"  value="Login" action="#{loginBean.connexion}"/>
+<!--                    <h:button styleClass="cursor-pointer bg-primary-bg inline-block w-full p-2" value="Go to Home" outcome="index.xhtml?faces-redirect=true" />-->
+                    <h:button styleClass="cursor-pointer inline-block w-full p-2" value="Créer un nouveau compte" outcome="enregistre.xhtml?faces-redirect=true"/>
+                </div>
+            </h:form>
+        </div>
+    </h:body>
+</f:view>
+</html>
